@@ -1,44 +1,48 @@
-module.exports = function(config) {
+module.exports = function (config) {
   config.set({
-    basePath: '../',
+    basePath: "../",
 
     files: [
-      'app/lib/angular-1.2.32/angular.js',
-      'app/lib/angular-1.2.32/angular-*.js',
-      'app/lib/iso-3166-country-codes-angular/*.js',
-      'test/lib/angular-1.2.32/angular-mocks.js',
-      'app/js/**/*.js',
-      'test/unit/**/*.js'
+      "node_modules/angular/angular.js",
+      "node_modules/angular-mocks/angular-mocks.js",
+      "node_modules/iso-3166-country-codes-angular/*.js",
+      "app/js/**/*.js",
+      "test/unit/**/*.js",
     ],
+
+    preprocessors: {
+      "test/**/*Spec.js": ["webpack"],
+    },
 
     autoWatch: true,
 
-    frameworks: ['jasmine'],
+    frameworks: ["jasmine"],
 
-    browsers: ['Chrome'],
+    browsers: ["Chrome"],
 
     plugins: [
-      'karma-junit-reporter',
-      'karma-chrome-launcher',
-      'karma-firefox-launcher',
-      'karma-jasmine'
+      "karma-junit-reporter",
+      "karma-chrome-launcher",
+      "karma-firefox-launcher",
+      "karma-jasmine",
+      "karma-typescript-preprocessor",
     ],
 
     junitReporter: {
-      outputFile: 'test_out/unit.xml',
-      suite: 'unit'
+      outputFile: "test_out/unit.xml",
+      suite: "unit",
     },
 
     customLaunchers: {
       Chrome_travis_ci: {
-        base: 'Chrome',
-        flags: ['--no-sandbox']
-      }
+        base: "Chrome",
+        flags: ["--no-sandbox"],
+      },
     },
   });
 
   if (process.env.TRAVIS) {
-    config.browsers = ['Chrome_travis_ci'];
+    config.browsers = ["Chrome_travis_ci"];
     config.singleRun = true;
   }
-}
+};
