@@ -3,7 +3,7 @@ module.exports = function (config) {
     basePath: "../",
 
     files: [
-      // "node_modules/angular/angular.js",
+      "node_modules/zone.js/bundles/zone.umd.min.js",
       "app/dist/bundle.js",
       "node_modules/angular-mocks/angular-mocks.js",
       "test/unit/**/*.js",
@@ -20,8 +20,6 @@ module.exports = function (config) {
       "karma-chrome-launcher",
       "karma-firefox-launcher",
       "karma-jasmine",
-      "karma-typescript",
-      "karma-typescript-preprocessor",
     ],
 
     junitReporter: {

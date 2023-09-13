@@ -2,6 +2,8 @@
 
 BASE_DIR=`dirname $0`
 
+npm run build
+
 echo ""
 echo "Starting Karma Server (http://karma-runner.github.io)"
 echo "-------------------------------------------------------------------"

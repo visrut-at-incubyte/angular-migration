@@ -1,4 +1,5 @@
 const path = require("path");
+const webpack = require("webpack");
 
 module.exports = {
   entry: "./app/js/main.ts",
@@ -12,4 +13,13 @@ module.exports = {
   module: {
     rules: [{ test: /\.ts?$/, use: "ts-loader" }],
   },
+  plugins: [
+    new webpack.ContextReplacementPlugin(
+      // if you have anymore problems tweet me at @gdi2290
+      // The (\\|\/) piece accounts for path separators for Windows and MacOS
+      /(.+)?angular(\\|\/)core(.+)?/,
+      path.join(__dirname, "app"), // location of your src
+      {} // a map of your routes
+    ),
+  ],
 };

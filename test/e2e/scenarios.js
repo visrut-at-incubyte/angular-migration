@@ -1,7 +1,7 @@
 browser.waitForAngularEnabled(false);
 describe("OpenWeather App", function () {
   beforeEach(function () {
-    browser.get("http://localhost:3000"); // Replaces `browser().navigateTo(...)`
+    browser.get("http://localhost:4200"); // Replaces `browser().navigateTo(...)`
   });
 
   it("should automatically redirect to /forecast when location hash/fragment is empty", function () {
@@ -10,7 +10,7 @@ describe("OpenWeather App", function () {
 
   describe("Forecast view", function () {
     beforeEach(function () {
-      browser.get("http://localhost:3000"); // Replaces `browser().navigateTo(...)`
+      browser.get("http://localhost:4200"); // Replaces `browser().navigateTo(...)`
     });
 
     it("should render forecast when user navigates to /forecast", function () {
