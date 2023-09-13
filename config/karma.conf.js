@@ -3,16 +3,11 @@ module.exports = function (config) {
     basePath: "../",
 
     files: [
-      "node_modules/angular/angular.js",
+      // "node_modules/angular/angular.js",
+      "app/dist/bundle.js",
       "node_modules/angular-mocks/angular-mocks.js",
-      "node_modules/iso-3166-country-codes-angular/*.js",
-      "app/js/**/*.js",
       "test/unit/**/*.js",
     ],
-
-    preprocessors: {
-      "test/**/*Spec.js": ["webpack"],
-    },
 
     autoWatch: true,
 
@@ -25,6 +20,7 @@ module.exports = function (config) {
       "karma-chrome-launcher",
       "karma-firefox-launcher",
       "karma-jasmine",
+      "karma-typescript",
       "karma-typescript-preprocessor",
     ],
 
