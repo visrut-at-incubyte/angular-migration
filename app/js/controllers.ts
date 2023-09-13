@@ -9,29 +9,31 @@ angular
     "openWeatherMap",
     "exampleLocations",
     "stormLocations",
+    "api-version-service",
     "ISO3166",
-    function (
+    async function (
       $scope,
       openWeatherMap,
       exampleLocations,
       stormLocations,
+      version,
       ISO3166
     ) {
       $scope.message = "";
       $scope.hasState = "";
 
       // Expose example locations to $scope
-      $scope.exampleLocations = exampleLocations;
-      $scope.stormLocations = stormLocations;
+      $scope.exampleLocations = exampleLocations.getExampleLocations();
+      $scope.stormLocations = stormLocations.getStormLocations();
       $scope.iconBaseUrl = "http://openweathermap.org/img/w/";
 
       // On initialization load data for first example entry
-      $scope.forecast = openWeatherMap.queryForecastDaily({
-        location: exampleLocations[0],
+      $scope.forecast = await openWeatherMap.queryForecastDaily({
+        location: $scope.exampleLocations[0],
       });
 
       // Get forecast data for location as given in $scope.location
-      $scope.getForecastByLocation = function () {
+      $scope.getForecastByLocation = async function () {
         if ($scope.location == "" || $scope.location == undefined) {
           $scope.hasState = "has-warning";
           $scope.message = "Please provide a location";
@@ -40,7 +42,7 @@ angular
 
         $scope.hasState = "has-success";
 
-        $scope.forecast = openWeatherMap.queryForecastDaily({
+        $scope.forecast = await openWeatherMap.queryForecastDaily({
           location: $scope.location,
         });
       };

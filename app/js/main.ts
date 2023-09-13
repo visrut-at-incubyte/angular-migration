@@ -7,16 +7,27 @@ import "./app";
 import "./controllers";
 import "./directives";
 import "./filters";
-import "./services";
 
 import "@angular/compiler";
 import { NgModule } from "@angular/core";
 import { BrowserModule } from "@angular/platform-browser";
 import { UpgradeModule } from "@angular/upgrade/static";
 import { platformBrowserDynamic } from "@angular/platform-browser-dynamic";
+import { OpenWeatherService } from "./services/weather-service";
+import { HttpClientModule, HttpClient } from "@angular/common/http";
+import { ExampleLocationsService } from "./services/location-service";
+import { StormLocationsService } from "./services/strom-location-service";
+import { ApiVersionService } from "./services/version-service";
 
 @NgModule({
-  imports: [BrowserModule, UpgradeModule],
+  imports: [BrowserModule, UpgradeModule, HttpClientModule],
+  providers: [
+    OpenWeatherService,
+    ExampleLocationsService,
+    StormLocationsService,
+    ApiVersionService,
+    HttpClient,
+  ],
 })
 export class AppModule {
   ngDoBootstrap() {}

@@ -4,7 +4,7 @@ angular
   .module("openWeatherApp", [
     "ngRoute",
     "openWeatherApp.filters",
-    "openWeatherApp.services",
+    "openWeatherApp",
     "openWeatherApp.directives",
     "openWeatherApp.controllers",
     "iso-3166-country-codes",

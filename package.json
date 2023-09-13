@@ -12,7 +12,7 @@
     "url": "git://github.com/atufkas/angular-openweather-app.git"
   },
   "scripts": {
-    "start": "npx serve app",
+    "start": "ng serve",
     "test": "scripts/all-tests.sh",
     "build": "rimraf src/dist && webpack --bail --progress --profile --mode development",
     "test:e2e": "protractor protractor.config.js",
