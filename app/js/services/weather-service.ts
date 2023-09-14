@@ -68,5 +68,5 @@ export class OpenWeatherService {
 }
 
 angular
-  .module("openWeatherApp")
+  .module("openWeatherAppNew", [])
   .factory("openWeatherMap", downgradeInjectable(OpenWeatherService));

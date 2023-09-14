@@ -23,5 +23,5 @@ export class ApiVersionService {
 }
 
 angular
-  .module("openWeatherApp")
-  .factory("api-version-service", downgradeInjectable(ApiVersionService));
+  .module("openWeatherAppNewVersion", [])
+  .factory("apiVersion", downgradeInjectable(ApiVersionService));

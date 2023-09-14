@@ -38,5 +38,15 @@ platformBrowserDynamic()
   .then((platformRef) => {
     console.log("Angular Bootstrap!");
     const upgrade = platformRef.injector.get(UpgradeModule) as UpgradeModule;
-    upgrade.bootstrap(document.body, ["openWeatherApp"], { strictDi: true });
+    upgrade.bootstrap(
+      document.body,
+      [
+        "openWeatherApp",
+        "openWeatherApp.controllers",
+        "openWeatherApp.directives",
+        "openWeatherApp.filters",
+      ],
+      { strictDi: true }
+    );
+    console.log("Angular Module Bootstraped!");
   });

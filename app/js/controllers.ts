@@ -1,7 +1,10 @@
 import * as angular from "angular";
 
 angular
-  .module("openWeatherApp.controllers", [])
+  .module("openWeatherApp.controllers", [
+    "openWeatherAppNew",
+    "iso-3166-country-codes",
+  ])
 
   // Controller for "open weather map" api data search
   .controller("OpenWeatherCtrl", [
@@ -9,14 +12,12 @@ angular
     "openWeatherMap",
     "exampleLocations",
     "stormLocations",
-    "api-version-service",
     "ISO3166",
     async function (
       $scope,
       openWeatherMap,
       exampleLocations,
       stormLocations,
-      version,
       ISO3166
     ) {
       $scope.message = "";

@@ -23,5 +23,5 @@ export class StormLocationsService {
 }
 
 angular
-  .module("openWeatherApp")
+  .module("openWeatherAppNew")
   .factory("stormLocations", downgradeInjectable(StormLocationsService));

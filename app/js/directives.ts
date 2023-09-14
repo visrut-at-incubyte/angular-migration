@@ -3,16 +3,16 @@ import * as angular from "angular";
 /* Directives */
 
 angular
-  .module("openWeatherApp.directives", [])
+  .module("openWeatherApp.directives", ["openWeatherAppNewVersion"])
 
   //
   // Simple directive just setting version as elements value (kept from angular-seed dist)
   //
   .directive("appVersion", [
-    function () {
-      const version = "1.0.0";
+    "apiVersion",
+    function (apiVersion) {
       return function (scope, elm, attrs) {
-        elm.text(version);
+        elm.text(apiVersion.version);
       };
     },
   ])

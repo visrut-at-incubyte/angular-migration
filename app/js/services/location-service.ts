@@ -24,5 +24,5 @@ export class ExampleLocationsService {
 }
 
 angular
-  .module("openWeatherApp")
+  .module("openWeatherAppNew")
   .factory("exampleLocations", downgradeInjectable(ExampleLocationsService));
