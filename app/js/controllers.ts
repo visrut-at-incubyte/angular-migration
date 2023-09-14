@@ -1,19 +1,15 @@
-import * as angular from "angular";
-
 angular
   .module("openWeatherApp.controllers", [
     "openWeatherAppNew",
     "iso-3166-country-codes",
   ])
-
-  // Controller for "open weather map" api data search
   .controller("OpenWeatherCtrl", [
     "$scope",
     "openWeatherMap",
     "exampleLocations",
     "stormLocations",
     "ISO3166",
-    async function (
+    function (
       $scope,
       openWeatherMap,
       exampleLocations,
@@ -29,13 +25,18 @@ angular
       $scope.iconBaseUrl = "http://openweathermap.org/img/w/";
 
       // On initialization load data for first example entry
-      $scope.forecast = await openWeatherMap.queryForecastDaily({
-        location: $scope.exampleLocations[0],
-      });
+      openWeatherMap
+        .queryForecastDaily({ location: $scope.exampleLocations[0] })
+        .then(function (forecast) {
+          $scope.forecast = forecast;
+        })
+        .catch(function (error) {
+          // Handle the error here
+        });
 
       // Get forecast data for location as given in $scope.location
-      $scope.getForecastByLocation = async function () {
-        if ($scope.location == "" || $scope.location == undefined) {
+      $scope.getForecastByLocation = function () {
+        if (!$scope.location) {
           $scope.hasState = "has-warning";
           $scope.message = "Please provide a location";
           return;
@@ -43,9 +44,14 @@ angular
 
         $scope.hasState = "has-success";
 
-        $scope.forecast = await openWeatherMap.queryForecastDaily({
-          location: $scope.location,
-        });
+        openWeatherMap
+          .queryForecastDaily({ location: $scope.location })
+          .then(function (forecast) {
+            $scope.forecast = forecast;
+          })
+          .catch(function (error) {
+            // Handle the error here
+          });
       };
 
       // Set $scope.location and execute search on API

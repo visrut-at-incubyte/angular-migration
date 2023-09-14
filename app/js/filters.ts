@@ -9,7 +9,7 @@ angular
     "apiVersion",
     function (apiVersion) {
       return function (text) {
-        return String(text).replace(/\%VERSION\%/gm, apiVersion);
+        return String(text).replace(/\%VERSION\%/gm, apiVersion.version);
       };
     },
   ])

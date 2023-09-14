@@ -1,6 +1,6 @@
 import * as angular from "angular";
 
-import { Injectable } from "@angular/core";
+import { Inject, Injectable } from "@angular/core";
 import { HttpClient, HttpParams } from "@angular/common/http";
 import { Observable, firstValueFrom } from "rxjs";
 import { downgradeInjectable } from "@angular/upgrade/static";
@@ -12,7 +12,7 @@ export class OpenWeatherService {
   private apiKey = "279b4be6d54c8bf6ea9b12275a567156";
   private apiBaseUrl = "http://api.openweathermap.org/data/2.5/";
 
-  constructor(private http: HttpClient) {}
+  constructor(@Inject(HttpClient) private http: HttpClient) {}
 
   private buildParams(location: string): HttpParams {
     return new HttpParams()

@@ -1,7 +1,8 @@
 describe("OpenWeatherCtrl", function () {
-  var $controller, $rootScope, $scope, openWeatherMapMock;
+  var $controller, $rootScope, $scope, openWeatherMapMock, $q;
 
   // Load the module that contains the controller
+  beforeEach(module("$$UpgradeModule"));
   beforeEach(module("openWeatherApp.controllers"));
 
   // Mock the services and dependencies
@@ -16,16 +17,30 @@ describe("OpenWeatherCtrl", function () {
   });
 
   // Initialize the controller and a mock scope
-  beforeEach(inject(function (_$controller_, _$rootScope_) {
+  beforeEach(inject(function (_$controller_, _$rootScope_, _$q_) {
     $controller = _$controller_;
     $rootScope = _$rootScope_;
     $scope = $rootScope.$new();
+    $q = _$q_; // Inject $q service
+
+    // Mock openWeatherMap.queryForecastDaily to return a resolved promise
+    openWeatherMapMock.queryForecastDaily.and.returnValue($q.when({}));
 
     $controller("OpenWeatherCtrl", {
       $scope: $scope,
       openWeatherMap: openWeatherMapMock,
-      exampleLocations: ["New York", "Los Angeles"],
-      stormLocations: ["Miami", "Houston"],
+      exampleLocations: {
+        exampleLocations: ["New York", "Los Angeles"],
+        getExampleLocations: function () {
+          return ["New York", "Los Angeles"];
+        },
+      },
+      stormLocations: {
+        stormLocations: ["Miami", "Houston"],
+        getStormLocations: function () {
+          return ["Miami", "Houston"];
+        },
+      },
       ISO3166: {}, // Mock ISO3166 if needed
     });
   }));
@@ -59,6 +74,10 @@ describe("OpenWeatherCtrl", function () {
   it("should update hasState and message when location is not provided", function () {
     $scope.location = "";
     $scope.getForecastByLocation();
+
+    // Use $rootScope.$digest() to resolve promises
+    $rootScope.$digest();
+
     expect($scope.hasState).toBe("has-warning");
     expect($scope.message).toBe("Please provide a location");
   });
@@ -66,13 +85,17 @@ describe("OpenWeatherCtrl", function () {
   it("should update hasState when location is provided", function () {
     $scope.location = "Houston";
     $scope.getForecastByLocation();
+
+    // Use $rootScope.$digest() to resolve promises
+    $rootScope.$digest();
+
     expect($scope.hasState).toBe("has-success");
   });
 
   // Add more test cases for other controller methods as needed
 
   // Example test for getIconImageUrl function
-  it("should generate valid icon image URL", function () {
+  it("should generate a valid icon image URL", function () {
     var iconName = "01d"; // Example icon name
     var expectedUrl = "http://openweathermap.org/img/w/01d.png";
     var imageUrl = $scope.getIconImageUrl(iconName);

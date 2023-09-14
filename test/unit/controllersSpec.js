@@ -1,29 +1,30 @@
-'use strict';
+"use strict";
 
 /* jasmine specs for controllers go here */
 
-describe('OpenWeather App controllers', function(){
+describe("OpenWeather App controllers", function () {
+  beforeEach(module("$$UpgradeModule"));
+  beforeEach(module("openWeatherApp.controllers"));
+  beforeEach(module("openWeatherApp"));
+  beforeEach(module("iso-3166-country-codes"));
 
-  beforeEach(module('openWeatherApp.controllers'));
-  beforeEach(module('openWeatherApp.services'));
-  beforeEach(module('iso-3166-country-codes'));
-
-  describe('OpenWeatherCtrl', function() {
+  describe("OpenWeatherCtrl", function () {
     var $scope, ctrl, $httpBackend;
 
-    beforeEach(module('openWeatherApp'));
+    beforeEach(module("openWeatherApp"));
 
-    beforeEach(inject(function(_$httpBackend_, $rootScope, $controller) {
+    beforeEach(inject(function (_$httpBackend_, $rootScope, $controller) {
       $httpBackend = _$httpBackend_;
-      $httpBackend.expectGET('http://api.openweathermap.org/data/2.5').
-        respond([{forecast: {city: {name: 'Hamburg'} } }]);
+      $httpBackend
+        .expectGET("http://api.openweathermap.org/data/2.5")
+        .respond([{ forecast: { city: { name: "Hamburg" } } }]);
 
       $scope = $rootScope.$new();
-      ctrl = $controller('OpenWeatherCtrl', { $scope: $scope });
+      ctrl = $controller("OpenWeatherCtrl", { $scope: $scope });
     }));
 
-   it('should set the default value of iconBaseUrl', function() {
-     expect($scope.iconBaseUrl).toBe('http://openweathermap.org/img/w/');
-   });
+    it("should set the default value of iconBaseUrl", function () {
+      expect($scope.iconBaseUrl).toBe("http://openweathermap.org/img/w/");
+    });
   });
 });

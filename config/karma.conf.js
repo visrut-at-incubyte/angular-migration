@@ -6,7 +6,7 @@ module.exports = function (config) {
       "node_modules/zone.js/bundles/zone.umd.min.js",
       "app/dist/bundle.js",
       "node_modules/angular-mocks/angular-mocks.js",
-      "test/unit/**/*.js",
+      "test/unit/**/*Spec.js",
     ],
 
     autoWatch: true,
