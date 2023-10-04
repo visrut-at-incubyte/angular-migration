@@ -1,6 +1,5 @@
 angular
-  .module("openWeatherApp.services")
-
+  .module("openWeatherAppLogic")
   .factory("openWeatherMap", function ($resource) {
     var apiKey = "279b4be6d54c8bf6ea9b12275a567156";
     var apiBaseUrl = "http://api.openweathermap.org/data/2.5/";

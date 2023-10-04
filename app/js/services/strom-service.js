@@ -1,5 +1,5 @@
 angular
-  .module("openWeatherApp.services")
+  .module("openWeatherAppLogic")
   .value("stormLocations", [
     "Sylt",
     "St. Peter-Ording",
