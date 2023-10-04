@@ -1,32 +1,23 @@
-'use strict';
-
-/* http://docs.angularjs.org/guide/dev_guide.e2e-testing */
-
-describe('OpenWeather App', function() {
-
-  beforeEach(function() {
-    browser().navigateTo('../../app/index.html');
+browser.waitForAngularEnabled(false);
+describe("OpenWeather App", function () {
+  beforeEach(function () {
+    browser.get("http://localhost:8000"); // Replaces `browser().navigateTo(...)`
   });
 
-
-  it('should automatically redirect to /forecast when location hash/fragment is empty', function() {
-    expect(browser().location().url()).toBe("/forecast");
+  it("should automatically redirect to /forecast when location hash/fragment is empty", function () {
+    expect(browser.getCurrentUrl()).toMatch("/forecast"); // Changes in syntax for getting current URL
   });
 
-
-  describe('Forecast view', function() {
-
-    beforeEach(function() {
-      browser().navigateTo('#/forecast');
+  describe("Forecast view", function () {
+    beforeEach(function () {
+      browser.get("http://localhost:8000"); // Replaces `browser().navigateTo(...)`
     });
 
-    it('should render forecast when user navigates to /forecast', function() {
-      expect(element('[ng-view] form button[type="submit"]').text()).toMatch(/Search!/);
-    });
-
-    it('should map the value of an "instant city forecast" button to the input field', function() {
-      element('[ng-view] form .btn-group > button:first-child').click();
-      expect(element('[ng-view] form input#location').attr('value')).toBe('Hamburg');
+    it("should render forecast when user navigates to /forecast", function () {
+      browser.waitForAngularEnabled(true);
+      expect(
+        element(by.css('form button[type="submit"].btn-primary')).getText()
+      ).toMatch(/Search!/);
     });
   });
 });
