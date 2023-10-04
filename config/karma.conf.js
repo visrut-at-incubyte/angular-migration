@@ -8,6 +8,7 @@ module.exports = function (config) {
       "app/lib/iso-3166-country-codes-angular/*.js",
       "test/lib/angular-1.2.32/angular-mocks.js",
       "app/js/services/version-service.js",
+      "app/angular2/*.js",
       "app/js/**/*.js",
       "test/unit/**/*.js",
     ],
